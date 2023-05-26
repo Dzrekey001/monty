@@ -1,11 +1,14 @@
 #ifndef __MONTY_H__
 #define __MONTY_H__
 #include <stdlib.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <ctype.h>
 #define MAX 20
+#define MAX_LINE_LENGTH 1024
 
 extern struct Montycontext
 {
@@ -47,7 +50,7 @@ typedef struct instruction_s
 } instruction_t;
 
 
-
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void (*get_func(char *ex_op_code))(stack_t **, unsigned int);
 void ops_push(stack_t **stack, unsigned int line_number);
 
