@@ -11,10 +11,11 @@ struct Montycontext context = {NULL, NULL, NULL, 0};
 int main(int argc, char **argv)
 {
 	FILE *file_ptr;
-	ssize_t byte_read = 0, lin_buf = 0, line_len = 0, line_num = 1;
+	ssize_t byte_read = 0, line_len = 0, line_num = 1;
+	size_t lin_buf = 0;
 	char *line_read = NULL;
 	char op_code[MAX], op_value[MAX];
-	stack_t *STACK = NULL, *tmp;
+	stack_t *STACK = NULL;
 
 	if (argc != 2 || !argv[1])
 		usage_err();
@@ -25,7 +26,7 @@ int main(int argc, char **argv)
 
 	if (!file_ptr)
 		file_err();
-	while ((byte_read = getline(&line_read, &lin_buf, file_ptr)) != -1)
+	while ((byte_read = _getline(&line_read, &lin_buf, file_ptr)) != -1)
 	{
 		line_len = sscanf(line_read, "%s %s", op_code, op_value);
 		if (line_len > 2)
